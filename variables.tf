@@ -69,11 +69,15 @@ variable "dns_zone_name" {
 }
 
 variable "dns_record_name" {
-  description = "DNS record type == A. For example: "ansible-dev" will become ansible-dev.cloud.example.com"
+  description = "DNS record type == A. For example: 'ansible-dev' will become ansible-dev.cloud.example.com"
   default = "ansible-dev"
 }
 
-variable "username" {}
+variable "username" {
+  description = "username of user account to be created"
+  default = "google"
+}
+
 variable "public_key_path" {
   description = "Only private-key auth is enabled by default. Use `ssh-keygen -t rsa` to generate a public-private keypair."
   default = "~/.ssh/id_rsa.pub"
