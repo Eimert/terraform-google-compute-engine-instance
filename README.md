@@ -71,7 +71,7 @@ terraform apply
 ```
 6. Wait a few minutes.
 7. Connect using SSH (private key auth): `ssh -i <private key> <username>@<ip from output>`. Or: `ssh eimert@ansible-dev.cloud.eimertvink.nl`.
-8. Destroy:
+8. Break down the resources:
 ```bash
 terraform destroy
 ```
