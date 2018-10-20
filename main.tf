@@ -2,6 +2,7 @@
 resource "google_compute_address" "instances" {
   count = "${var.amount}"
   name  = "${var.name_prefix}-${count.index}"
+  description = "Managed by Terraform"
   region = "${var.region}"
 }
 
@@ -9,6 +10,7 @@ resource "google_compute_disk" "instances" {
   count = "${var.amount}"
 
   name = "${var.name_prefix}-${count.index+1}"
+  description = "Managed by Terraform"
   type = "${var.disk_type}"
   size = "${var.disk_size}"
   # optional
@@ -44,6 +46,7 @@ resource "google_compute_instance" "instances" {
   count = "${var.amount}"
 
   name         = "${var.name_prefix}-${count.index+1}"
+  description  = "Managed by Terraform"
   zone         = "${var.zone}"
   machine_type = "${var.machine_type}"
 
@@ -112,6 +115,7 @@ resource "google_dns_record_set" "dns_record" {
   # name = "${var.dns_record_name}.${google_dns_managed_zone.managed_zone.dns_name}"
   # managed_zone = "${google_dns_managed_zone.managed_zone.name}"
   name = "${var.dns_record_name}.${var.dns_zone_name}"
+  description = "Managed by Terraform"
   managed_zone = "${var.dns_managed_zone_name_indicator}"
   type = "A"
   ttl  = 300

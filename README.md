@@ -18,7 +18,7 @@ provider "google" {
   project     = "smashing-dash-1992"
 }
 
-# Configuring DNS is optional, values can be left as-is
+# google_dns_managed_zone resource is required. If not used, values can be left as-is.
 resource "google_dns_managed_zone" "managed_zone" {
   # descriptive name for dns zone
   name     = "cloud-zone"
@@ -40,7 +40,7 @@ module "gc1" {
 
   dns_managed_zone_name_indicator = "${google_dns_managed_zone.managed_zone.name}"
   dns_zone_name   = "${google_dns_managed_zone.managed_zone.dns_name}"
-  dns_record_name = "ansible-dev"
+  dns_record_name = "tower-dev"
 
   user_data       = "firestone-lab"
   username        = "eimert"
