@@ -34,7 +34,8 @@ variable "disk_size" {
   default = "20"
 }
 variable "disk_image" {
-  description = "OS image"
+  description = "<a href='https://cloud.google.com/compute/docs/images'>Available OS images/templates</a>"
+  default = "centos-cloud/centos-7"
 }
 
 variable "disk_create_local_exec_command_or_fail" {
