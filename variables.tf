@@ -12,13 +12,17 @@ variable "amount" {
   description = "Number of VMs"
   default = "1"
 }
+
 variable "name_prefix" {
   description = "hostname format: name_prefix-amount"
   default = "vm"
 }
+
 variable "machine_type" {
   description = "List of VM sizes: https://github.com/Eimert/terraform-google-compute-engine-instance#machine_type"
+  default = "n1-standard-2"
 }
+
 variable "user_data" {
   description = "VM description."
   default = "Managed by terraform plan https://github.com/Eimert/terraform-google-compute-engine-instance"
@@ -30,11 +34,11 @@ variable "disk_type" {
 }
 
 variable "disk_size" {
-  description = "Size in GB"
+  description = "Primary disk' size in GB"
   default = "20"
 }
 variable "disk_image" {
-  description = "<a href='https://cloud.google.com/compute/docs/images'>Available OS images/templates</a>"
+  description = "[Available OS images/templates](https://cloud.google.com/compute/docs/images)"
   default = "centos-cloud/centos-7"
 }
 
