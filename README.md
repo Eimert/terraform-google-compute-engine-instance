@@ -11,7 +11,7 @@ Creates instances with public IP addresses. Machine type can be changed without 
 
 1. Create a new directory for this terraform configuration
 2. Create a main.tf, for example:
-```
+```ruby
 # Spin up VMs on compute engine
 
 # Configure the Google Cloud provider
@@ -61,18 +61,18 @@ module "gc1" {
 3. ```terraform init```
 4. ```terraform plan``` Boom! Credentials file missing.
 5. Add your google cloud credentials in a .json file. [Getting started guide](https://www.terraform.io/docs/providers/google/getting_started.html#adding-credentials)
-<aside class="warning">
-Keep the Google Cloud credentials in a safe place. Don't push them to Git.
-</aside>
+
+> Keep the Google Cloud credentials in a safe place. Don't push them to Git.
+
 6. Adapt the Terraform variables in `main.tf` to match your Google cloud project name, and VM requirements. All optional parameters can be found in [variables.tf](./variables.tf).
 5. Let terraform fire up the VM's:
-```
+```bash
 terraform apply
 ```
 6. Wait a few minutes.
 7. Connect using SSH (private key auth): `ssh -i <private key> <username>@<ip from output>`. Or: `ssh eimert@ansible-dev.cloud.eimertvink.nl`.
 8. Destroy:
-```
+```bash
 terraform destroy
 ```
 
@@ -106,7 +106,7 @@ This terraform plan creates an DNS A record for VMs. When (VM) `amount = 2`, thi
 <img src="./img/console.cloud.google.com-cloud.eimertvink.nl.png" border="1">
 <br>
 If you want a unique (sub-)subdomain for every VM, use multiple TF module calls:
-```
+```ruby
 module "gc1" {
   (..)
   dns_record_name = "ansible-dev"
