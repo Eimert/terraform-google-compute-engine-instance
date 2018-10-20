@@ -39,7 +39,7 @@ variable "dns_zone" {
   default = "cloud.example.com."
 }
 
-var "dns_record_name" {
+variable "dns_record_name" {
   # For example: "ansible-dev" will become ansible-dev.cloud.example.com
   default = "ansible-dev"
 }
