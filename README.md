@@ -2,9 +2,6 @@
 
 Create virtual machines on Google Cloud. With DNS A record for easy access. Published in the [Terraform registry](https://registry.terraform.io/modules/Eimert/compute-engine-instance/).
 
-- Separated disk and static ip for better manageability
-- Substitutes `$$REGION` and `$$ZONE` in user-data
-
 ## Usage example:
 
 Create VMs with public IP addresses and DNS A record alias. Machine type can be changed without destroying the boot disk.
