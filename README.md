@@ -1,6 +1,6 @@
 # terraform-google-compute-engine-instance
 
-Create virtual machines on Google Cloud. With DNS A record.
+Create virtual machines on Google Cloud. With DNS A record for easy access. Published in the [Terraform registry](https://registry.terraform.io/modules/Eimert/compute-engine-instance/).
 
 - Separated disk and static ip for better manageability
 - Substitutes `$$REGION` and `$$ZONE` in user-data
