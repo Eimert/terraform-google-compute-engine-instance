@@ -21,12 +21,6 @@ provider "google" {
   version     = "~> 1.8"
 }
 
-# https://cloud.google.com/compute/docs/images
-data "google_compute_image" "os_image" {
-  project = "centos-cloud"
-  family  = "centos-7"
-}
-
 # Configuring DNS is optional, values can be left as-is
 resource "google_dns_managed_zone" "managed_zone" {
   # descriptive name for dns zone
@@ -37,19 +31,18 @@ resource "google_dns_managed_zone" "managed_zone" {
 
 module "gc1" {
   source          = "github.com/Eimert/terraform-google-compute-engine-instance"
-  amount          = 2
+  amount          = 1
   region          = "europe-west4"
   zone            = "europe-west4-c"
   # hostname format: name_prefix-amount
   name_prefix     = "vm"
   machine_type    = "custom-2-4096"
-  disk_type       = "pd-standard"
+  disk_type       = "pd-ssd"
   disk_size       = "15"
-  disk_image      = "${data.google_compute_image.os_image.self_link}"
+  disk_image      = "centos-cloud/centos-7"
 
   dns_managed_zone_name_indicator = "${google_dns_managed_zone.managed_zone.name}"
   dns_zone_name   = "${google_dns_managed_zone.managed_zone.dns_name}"
-  # DNS A record
   dns_record_name = "ansible-dev"
 
   user_data       = "firestone-lab"
