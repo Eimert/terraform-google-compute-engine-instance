@@ -2,15 +2,16 @@
 resource "google_compute_address" "instances" {
   count = "${var.amount}"
   name  = "${var.name_prefix}-${count.index}"
-  description = "Managed by Terraform"
   region = "${var.region}"
+  metadata {
+    description  = "Managed by Terraform"
+  }
 }
 
 resource "google_compute_disk" "instances" {
   count = "${var.amount}"
 
   name = "${var.name_prefix}-${count.index+1}"
-  description = "Managed by Terraform"
   type = "${var.disk_type}"
   size = "${var.disk_size}"
   # optional
@@ -39,6 +40,10 @@ resource "google_compute_disk" "instances" {
     command    = "${var.disk_destroy_local_exec_command_and_continue}"
     on_failure = "continue"
   }
+
+  metadata {
+    description  = "Managed by Terraform"
+  }
 }
 
 # https://www.terraform.io/docs/providers/google/r/compute_instance.html
@@ -46,7 +51,6 @@ resource "google_compute_instance" "instances" {
   count = "${var.amount}"
 
   name         = "${var.name_prefix}-${count.index+1}"
-  description  = "Managed by Terraform"
   zone         = "${var.zone}"
   machine_type = "${var.machine_type}"
 
@@ -57,6 +61,7 @@ resource "google_compute_instance" "instances" {
 
   # reference: https://cloud.google.com/compute/docs/storing-retrieving-metadata
   metadata {
+    description  = "Managed by Terraform"
     user-data = "${replace(replace(var.user_data, "$$ZONE", var.zone), "$$REGION", var.region)}"
     ssh-keys = "${var.username}:${file("${var.public_key_path}")}"
   }
@@ -115,10 +120,13 @@ resource "google_dns_record_set" "dns_record" {
   # name = "${var.dns_record_name}.${google_dns_managed_zone.managed_zone.dns_name}"
   # managed_zone = "${google_dns_managed_zone.managed_zone.name}"
   name = "${var.dns_record_name}.${var.dns_zone_name}"
-  description = "Managed by Terraform"
   managed_zone = "${var.dns_managed_zone_name_indicator}"
   type = "A"
   ttl  = 300
 
   rrdatas = ["${google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip}"]
+
+  metadata {
+    description = "Managed by Terraform"
+  }
 }
