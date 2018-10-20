@@ -39,6 +39,7 @@ resource "google_compute_disk" "instances" {
   }
 }
 
+# https://www.terraform.io/docs/providers/google/r/compute_instance.html
 resource "google_compute_instance" "instances" {
   count = "${var.amount}"
 
@@ -69,6 +70,8 @@ resource "google_compute_instance" "instances" {
     on_host_maintenance = "MIGRATE"
     automatic_restart   = "${var.automatic_restart}"
   }
+
+  allow_stopping_for_update = "true"
 }
 
 # ========================================================================================= #
