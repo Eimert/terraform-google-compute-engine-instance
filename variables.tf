@@ -63,17 +63,16 @@ variable "automatic_restart" {
   default = "true"
 }
 
-variable "dns_managed_zone_name_indicator" {
-  description = "Descriptive name for dns_zone_name. See README.md with example for creating resource google_dns_managed_zone."
+variable "dns_name" {
+  description = "Descriptive name for dns_zone. Use module google-managed-dns-zone to create."
 }
 
-variable "dns_zone_name" {
-  description = "The DNS zone that is pointing to Google' nameservers (if any). A.k.a. Google' DNS SOA (start of authority). Required suffix: . (dot). See README.md with example for creating resource google_dns_managed_zone."
+variable "dns_zone" {
+  description = "The DNS zone that is pointing to Google' nameservers (if any). A.k.a. Google' DNS SOA (start of authority). Required suffix: . (dot). Use module google-managed-dns-zone to create."
 }
 
 variable "dns_record_name" {
   description = "DNS record type == A. For example: 'tower-dev' will become tower-dev.cloud.example.com"
-  default = "tower-dev"
 }
 
 variable "username" {

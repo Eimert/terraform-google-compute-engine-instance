@@ -15,15 +15,17 @@ provider "google" {
   project     = "smashing-dash-1992"
 }
 
-# google_dns_managed_zone resource is required. If not used, values can be left as-is.
-resource "google_dns_managed_zone" "managed_zone" {
+module "google-dns-managed-zone" {
+  source          = "github.com/Eimert/terraform-google-dns-managed-zone"
+  region          = "europe-west4"
+  zone            = "europe-west4-c"
   # descriptive name for dns zone
-  name     = "cloud-zone"
+  dns_name        = "cloud-zone"
   # requires last dot. Ex.: prod.example.com.
-  dns_name = "cloud.eimertvink.nl."
+  dns_zone        = "cloud.eimertvink.nl."
 }
 
-module "gc1" {
+module "vm1" {
   source          = "github.com/Eimert/terraform-google-compute-engine-instance"
   amount          = 1
   region          = "europe-west4"
@@ -35,8 +37,8 @@ module "gc1" {
   disk_size       = "15"
   disk_image      = "centos-cloud/centos-7"
 
-  dns_managed_zone_name_indicator = "${google_dns_managed_zone.managed_zone.name}"
-  dns_zone_name   = "${google_dns_managed_zone.managed_zone.dns_name}"
+  dns_name        = "${module.google-dns-managed-zone.dns_name}"
+  dns_zone        = "${module.google-dns-managed-zone.dns_zone}"
   dns_record_name = "tower-dev"
 
   user_data       = "firestone-lab"
