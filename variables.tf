@@ -34,7 +34,7 @@ variable "automatic_restart" {
 }
 
 variable "dns_managed_zone_name_indicator" {
-  # unimportant name
+  description = "descriptive name for dns_zone_name"
   default = "cloud-zone"
 }
 
@@ -46,6 +46,7 @@ variable "dns_zone_name" {
 }
 
 variable "dns_record_name" {
+  # DNS record type == A
   # For example: "ansible-dev" will become ansible-dev.cloud.example.com
   default = "ansible-dev"
 }
