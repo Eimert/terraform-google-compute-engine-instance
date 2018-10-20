@@ -3,9 +3,6 @@ resource "google_compute_address" "instances" {
   count = "${var.amount}"
   name  = "${var.name_prefix}-${count.index}"
   region = "${var.region}"
-  metadata {
-    description  = "Managed by Terraform"
-  }
 }
 
 resource "google_compute_disk" "instances" {
@@ -39,10 +36,6 @@ resource "google_compute_disk" "instances" {
     when       = "destroy"
     command    = "${var.disk_destroy_local_exec_command_and_continue}"
     on_failure = "continue"
-  }
-
-  metadata {
-    description  = "Managed by Terraform"
   }
 }
 
@@ -125,8 +118,4 @@ resource "google_dns_record_set" "dns_record" {
   ttl  = 300
 
   rrdatas = ["${google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip}"]
-
-  metadata {
-    description = "Managed by Terraform"
-  }
 }
