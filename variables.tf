@@ -33,9 +33,14 @@ variable "automatic_restart" {
   default = "true"
 }
 
+variable "dns_managed_zone_name_indicator" {
+  # unimportant name
+  default = "cloud-zone"
+}
+
 variable "dns_zone_name" {
   # the DNS zone that is pointing to Google' nameservers (if any)
-  # Google' DNS SOA (start of authority)
+  # A.k.a. Google' DNS SOA (start of authority)
   # requires last dot.
   default = "cloud.example.com."
 }
