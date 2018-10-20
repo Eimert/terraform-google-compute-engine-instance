@@ -7,18 +7,15 @@ Create virtual machines on Google Cloud. With DNS A record for easy access. Publ
 
 ## Usage example:
 
-Creates instances with public IP addresses. Machine type can be changed without destroying the boot disk.
+Create VMs with public IP addresses and DNS A record alias. Machine type can be changed without destroying the boot disk.
 
 1. Create a new directory for this terraform configuration
 2. Create a main.tf, for example:
 ```ruby
-# Spin up VMs on compute engine
-
 # Configure the Google Cloud provider
 provider "google" {
   credentials = "${file("king-of-my-google-cloud-castle.json")}"
   project     = "smashing-dash-1992"
-  version     = "~> 1.8"
 }
 
 # Configuring DNS is optional, values can be left as-is
@@ -36,7 +33,7 @@ module "gc1" {
   zone            = "europe-west4-c"
   # hostname format: name_prefix-amount
   name_prefix     = "vm"
-  machine_type    = "custom-2-4096"
+  machine_type    = "n1-standard-2"
   disk_type       = "pd-ssd"
   disk_size       = "15"
   disk_image      = "centos-cloud/centos-7"
@@ -50,6 +47,7 @@ module "gc1" {
   public_key_path = "~/.ssh/id_rsa.pub"
 }
 
+# module "gc2" {}
 ```
 3. ```terraform init```
 4. ```terraform plan``` Boom! Credentials file missing.
