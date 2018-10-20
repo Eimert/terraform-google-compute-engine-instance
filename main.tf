@@ -101,21 +101,22 @@ resource "google_compute_instance" "instances" {
 #                   binding a DNS name to the ephemeral IP of a new instance                #
 # ========================================================================================= #
 
-resource "google_dns_managed_zone" "dns_zone" {
+resource "google_dns_managed_zone" "managed_zone" {
   # must be unique: ex. prod-zone
-  name     = "${var.dns_name}zone"
-  # requires last dot. Ex.: prod.mydomain.com.
-  dns_name = "${var.dns_name}"
+  name     = "${var.dns_zone}zone"
+  # requires last dot. Ex.: prod.example.com.
+  dns_name = "${var.dns_zone}"
 }
 
 resource "google_dns_record_set" "dns_record" {
   # name = "${google_compute_instance.instances.*.name[count.index]}.${google_dns_managed_zone.dns_zone.dns_name}"
-  name = "${var.name_prefix}.${google_dns_managed_zone.dns_zone.dns_name}"
+  # for example: ansible-prod.mydomain.com
+  name = "${var.dns_record_name}.${google_dns_managed_zone.managed_zone.dns_name}"
   type = "A"
   ttl  = 300
 
-  managed_zone = "${google_dns_managed_zone.dns_zone.name}"
+  managed_zone = "${google_dns_managed_zone.managed_zone.name}"
   # to-do: create /join IPs in list
   # rrdatas = ["${google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip}"]
-  rrdatas = ["${google_compute_instance.instances.dns_zone.network_interface.0.access_config.0.nat_ip}"]
+  rrdatas = ["${google_compute_instance.instances.managed_zone.network_interface.0.access_config.0.nat_ip}"]
 }

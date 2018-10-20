@@ -33,13 +33,15 @@ variable "automatic_restart" {
   default = "true"
 }
 
-# variable "dns_zone_name" {
-#  default = "dev_zone"
-# }
-
-var "dns_name" {
+variable "dns_zone" {
+  # the DNS zone that is pointing to Google' nameservers (if any)
   # requires last dot.
-  default = "dev.example.com."
+  default = "cloud.example.com."
+}
+
+var "dns_record_name" {
+  # For example: "ansible-dev" will become ansible-dev.cloud.example.com
+  default = "ansible-dev"
 }
 
 variable "username" {}
