@@ -118,5 +118,5 @@ resource "google_dns_record_set" "dns_record" {
   managed_zone = "${google_dns_managed_zone.managed_zone.name}"
   # to-do: create /join IPs in list
   # rrdatas = ["${google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip}"]
-  rrdatas = ["${google_compute_instance.instances.managed_zone.network_interface.0.access_config.0.assigned_nat_ip}"]
+  rrdatas = ["${google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip}"]
 }
