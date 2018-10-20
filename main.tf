@@ -106,8 +106,10 @@ resource "google_dns_record_set" "dns_record" {
   # name = "${google_compute_instance.instances.*.name[count.index]}.${google_dns_managed_zone.dns_zone.dns_name}"
   # for example: dns_record_name=ansible-dev
   # will be: ansible-dev.cloud.eimertvink.nl
-  name = "${var.dns_record_name}.${google_dns_managed_zone.managed_zone.dns_name}"
-  managed_zone = "${google_dns_managed_zone.managed_zone.name}"
+  # name = "${var.dns_record_name}.${google_dns_managed_zone.managed_zone.dns_name}"
+  # managed_zone = "${google_dns_managed_zone.managed_zone.name}"
+  name = "${var.dns_record_name}.${var.dns_record_name}"
+  managed_zone = "${var.dns_zone_name}"
   type = "A"
   ttl  = 300
 
