@@ -17,8 +17,7 @@ provider "google" {
 
 module "google-dns-managed-zone" {
   source          = "github.com/Eimert/terraform-google-dns-managed-zone"
-  region          = "europe-west4"
-  zone            = "europe-west4-c"
+
   # descriptive name for dns zone
   dns_name        = "cloud-zone"
   # requires last dot. Ex.: prod.example.com.
@@ -59,7 +58,7 @@ module "vm1" {
 ```bash
 terraform apply
 ```
-6. Wait a few minutes.
+6. Wait a few ~~minutes~~ seconds.
 7. Connect using SSH (private key auth): `ssh -i <private key> <username>@<ip from output>`. Or: `ssh eimert@ansible-dev.cloud.eimertvink.nl`.
 8. Break down the resources:
 ```bash
