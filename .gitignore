@@ -1,8 +1,11 @@
+# all modules
+modules/
+
+# no cloud credentials
 *.json
+
+# no terrafom init module files
 .terraform/
 
 # don't want to commit cloud resource state
 *tfstate*
-
-# not storing artefacts
-roles/

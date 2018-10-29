@@ -7,3 +7,9 @@ output "addresses" {
   description = "VM IP addresses."
   value = "${join(",", google_compute_address.instances.*.address)}"
 }
+
+output "username" {
+  description = "ansible_user"
+  value = "${var.username}"
+}
+

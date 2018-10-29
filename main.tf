@@ -87,17 +87,17 @@ resource "google_compute_instance" "instances" {
 #   # generic connection block for all provisioners
 #   connection {
 #     type                          = "ssh"
-#     host                          = "${google_compute_address.instances.*.address[count.index]}"
+#     host                          = "${google_compute_instance.instances.*.network_interface.0.access_config.0.assigned_nat_ip}"
 #     user                          = "${var.username}"
 #     private_key                   = "${file("${var.private_key_path}")}"
 #   }
 
-# reference: https://github.com/jonmorehouse/terraform-provisioner-ansible
-# fails: not maintained, not compatible with latest tf version
-# provisioner "ansible" {
-#   playbook = "awx.yml"
-#   hosts = ["all"]
-# }
+  # reference: https://github.com/jonmorehouse/terraform-provisioner-ansible
+  # fails: not maintained, not compatible with latest tf version
+  # provisioner "ansible" {
+  # playbook = "awx.yml"
+  # hosts = ["all"]
+  # }
 
 # }
 
