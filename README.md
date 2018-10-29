@@ -86,7 +86,9 @@ n1-highcpu-8
 ```
 Values are derived from [Google cloud console REST API call examples](https://console.cloud.google.com/compute/instancesAdd). Click for CPU and memory details.
 
-## DNS
+## DNS Setup
+
+A simple step-by-step guide can be found in [this stackoverflow](https://stackoverflow.com/questions/23356881/manage-only-a-subdomain-with-google-cloud-dns) answer. The only issue I've found is that the Google' NS tend to change over terraform runs.<br>
 
 The subdomain cloud.eimertvink.nl is configured with Google' nameservers:<br>
 <img src="./img/freedns-cloud.eimertvink.nl.png" border="1">
